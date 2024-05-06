@@ -4,7 +4,6 @@ RSpec.describe 'Show User Dashboard', type: :feature do
   describe 'When user visits "/users/:id"' do
     before(:each) do
       @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com')
-      @user2 = User.create!(name: 'Sam', email: 'sam@email.com')
 
       visit user_path(@user1)
     end
@@ -14,7 +13,7 @@ RSpec.describe 'Show User Dashboard', type: :feature do
 
       click_button 'Discover Movies'
 
-      expect(current_path).to eq("/users/:id/discover")
+      expect(current_path).to eq(user_discover_index_path(@user1))
     end
   end
 end
