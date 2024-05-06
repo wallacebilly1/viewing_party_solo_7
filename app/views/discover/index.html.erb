@@ -1,0 +1,7 @@
+<h2>Discover Movies</h2>
+<%= button_to "Find Top Rated Movies", user_movies_path(@user), method: :get, params: {keyword: "top 20rated"} %>
+
+<%= form_with url: user_movies_path(@user), method: :get, data: { turbo: false } do |f| %>
+  <%= f.text_field :keyword, placeholder: 'Search by Movie Title' %>
+  <%= f.submit "Find Movies" %>
+<% end %>
