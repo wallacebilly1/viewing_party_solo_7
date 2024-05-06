@@ -14,7 +14,6 @@ RSpec.describe 'Discover Page', type: :feature do
       click_button 'Find Top Rated Movies'
 
       expect(current_path).to eq("/users/#{@user1.id}/movies")
-      # expect(current_path).to eq("/users/#{@user1.id}/movies?q=top%20rated")
     end
 
     it 'They see a text field to enter keyword(s) to search for a movie title and a button to submit the search' do
