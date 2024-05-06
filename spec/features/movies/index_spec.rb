@@ -6,10 +6,22 @@ RSpec.describe 'Movies index Page', type: :feature do
   end
 
   describe "When a user visits the Movies Index page via serach or top 20" do
-    it 'They see a button to return to the Discover Page' do
-      #expect page to have "Return to Discover" button
-      #click_on button
-      #expect current path to eq user_discover_index(@user1)
+    it 'They see a button to Return to Discover Page' do
+      visit user_movies_path(@user1, keyword: "top 20rated")
+
+      expect(page).to have_button("Return to Discover Page")
+
+      click_button("Return to Discover Page")
+
+      expect(current_path).to eq(user_discover_index_path(@user1))
+
+      visit user_movies_path(@user1, keyword: "Lord of the Rings")
+
+      expect(page).to have_button("Return to Discover Page")
+
+      click_button("Return to Discover Page")
+
+      expect(current_path).to eq(user_discover_index_path(@user1))
     end
   end
 
