@@ -32,8 +32,7 @@ RSpec.describe 'Movies Results Page', type: :feature do
     end
 
     it 'They see the top 20 rated movies' do
-      #expect page to have top 20 section
-      #expect there to be 20 items within top 20 section
+      
     end
 
     it 'They see the title and vote average for each movie' do
