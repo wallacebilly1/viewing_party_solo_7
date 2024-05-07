@@ -1,7 +1,11 @@
 <h2>Movie Results</h2>
 <%= button_to "Return to Discover Page", user_discover_index_path(@user), method: :get %>
 
-<% @movies.each do |movie|%>
-  <p><%= link_to "#{movie[:original_title]}", user_movie_path(@user.id, movie[:id])%> </p>
-  <p> Vote Average: <%= movie[:vote_average] %> </p>
-<% end %>
+<section id="search _results">
+  <% @movies.each do |movie|%>
+    <div id="movie-<%= movie[:id] %>">
+      <h4><%= link_to "#{movie[:original_title]}", user_movie_path(@user.id, movie[:id])%> </h4>
+      <p> Average Score: <%= movie[:vote_average] %> </p>
+    </div>
+  <% end %>
+</section>

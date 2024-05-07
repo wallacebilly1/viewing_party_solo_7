@@ -6,7 +6,7 @@ RSpec.describe 'Movies Results Page', type: :feature do
   end
 
   describe "When a user visits the Movies Index page via serach or top 20" do
-    it 'They see a button to Return to Discover Page' do
+    it 'They see a button to Return to Discover Page', :vcr do
       visit user_movies_path(@user1, keyword: "top 20rated")
 
       expect(page).to have_button("Return to Discover Page")
@@ -25,7 +25,7 @@ RSpec.describe 'Movies Results Page', type: :feature do
     end
   end
 
-  describe "When a user clicks 'Find Top Rated Movies'" do
+  describe "When a user clicks 'Find Top Rated Movies'", :vcr do
     before(:each) do
       visit user_discover_index_path(@user1.id)
       click_button("Find Top Rated Movies")
@@ -48,7 +48,7 @@ RSpec.describe 'Movies Results Page', type: :feature do
     end
   end
 
-  describe "When a user searches for a movie" do
+  describe "When a user searches for a movie", :vcr do
     before(:each) do
       visit user_discover_index_path(@user1.id)
       fill_in :keyword, with: "Lord of the Rings"
