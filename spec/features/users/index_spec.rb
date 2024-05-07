@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Movies index Page', type: :feature do
+RSpec.describe 'Movies Results Page', type: :feature do
   before(:each) do
     @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com')
   end
@@ -27,7 +27,8 @@ RSpec.describe 'Movies index Page', type: :feature do
 
   describe "When a user clicks 'Find Top Rated Movies'" do
     before(:each) do
-      visit user_movies_path(@user1, keyword: "top 20rated")
+      visit user_discover_index_path(@user1.id)
+      click_button("Find Top Rated Movies")
     end
 
     it 'They see the top 20 rated movies' do
@@ -50,7 +51,9 @@ RSpec.describe 'Movies index Page', type: :feature do
 
   describe "When a user searches for a movie" do
     before(:each) do
-      visit user_movies_path(@user1, keyword: "Lord of the Rings")
+      visit user_discover_index_path(@user1.id)
+      fill_in :keyword, with: "Lord of the Rings"
+      click_button 'Find Movies'
     end
 
     it 'They see up to 20 movies that match their search' do
