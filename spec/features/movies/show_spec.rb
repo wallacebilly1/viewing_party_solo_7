@@ -8,12 +8,12 @@ RSpec.describe 'Movie Show Page', type: :feature do
       visit user_movie_path(@user1, "121")
     end
 
-    xit 'They see a button to Create a Viewing Party' do
-      expect(page).to have_button("Create a Viewing Party for Lord of the Rings")
+    it 'They see a button to Create a Viewing Party' do
+      expect(page).to have_button("Create Viewing Party for The Lord of the Rings: The Two Towers")
 
-      click_on("Create a Viewing Party for Lord of the Rings")
+      click_on("Create Viewing Party for The Lord of the Rings: The Two Towers")
 
-      expect(current_path).to eq("/users/#{@user1.id}/movies/121/viewing_party/new")
+      expect(current_path).to eq(new_user_movie_viewing_party_path(@user1, 121))
     end
 
     it 'They see a button to return to the Discover page' do
