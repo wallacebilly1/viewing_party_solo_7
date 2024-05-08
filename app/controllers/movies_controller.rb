@@ -28,4 +28,8 @@ class MoviesController < ApplicationController
       @movies = json[:results]
     end
   end
+
+  def show
+    
+  end
 end
