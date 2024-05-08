@@ -68,21 +68,31 @@ RSpec.describe 'Movies Results Page', type: :feature do
     end
 
     it 'They see up to 20 movies that match their search' do
-      #expect page to have search results section
-      #expect there to be 20 items within top 20 section
-      #expect those items to be the following: ...
+      expect(page).to have_css("#search_results div", between: 0..20)
+      
+      within("#search_results") do
+        expect(page).to have_content("The Lord of the Rings: The Two Towers")
+        expect(page).to_not have_content("Cats")
+      end
     end
 
     it 'They see the title and vote average for each movie' do
-      #within a specific movie's section
-      #expect page to have title
-      #expect page to have a vote average
+      within ("#movie-120") do
+        expect(page).to have_content("The Lord of the Rings: The Fellowship of the Ring")
+        expect(page).to have_content("Average Score: 8.4")
+      end
+
+      within ("#movie-121") do
+        expect(page).to have_content("The Lord of the Rings: The Two Towers")
+        expect(page).to have_content("Average Score: 8.4")
+      end
     end
 
     it 'When the user clicks on the title, they are taken to that movies details page' do
-      #within a specific movie's section
-      #click on title
-      #expect current path to eq user_movie_path(@user1.id, movie.id)
+      within ("#movie-120") do
+        click_on("The Lord of the Rings: The Fellowship of the Ring")
+        expect(current_path).to eq user_movie_path(@user1.id, "120")
+      end
     end
   end
 end
