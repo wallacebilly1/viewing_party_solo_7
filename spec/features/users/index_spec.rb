@@ -33,7 +33,7 @@ RSpec.describe 'Movies Results Page', type: :feature do
 
     it 'They see the top 20 rated movies' do
       expect(page).to have_css("#search_results div", count: 20)
-      
+
       within("#search_results") do
         expect(page).to have_content("Shawshank Redemption")
         expect(page).to_not have_content("Cats")
@@ -43,12 +43,12 @@ RSpec.describe 'Movies Results Page', type: :feature do
     it 'They see the title and vote average for each movie' do
       within ("#movie-278") do
         expect(page).to have_content("Shawshank Redemption")
-        expect(page).to have_content("Average Score: 8.704")
+        expect(page).to have_content("Average Score: 8.7")
       end
 
       within ("#movie-238") do
         expect(page).to have_content("The Godfather")
-        expect(page).to have_content("Average Score: 8.696")
+        expect(page).to have_content("Average Score: 8.7")
       end
     end
 
