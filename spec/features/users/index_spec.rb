@@ -5,7 +5,7 @@ RSpec.describe 'Movies Results Page', type: :feature do
     @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com')
   end
 
-  describe "When a user visits the Movies Index page via serach or top 20" do
+  describe "When a user visits the Movies Index page via search or top 20" do
     it 'They see a button to Return to Discover Page', :vcr do
       visit user_movies_path(@user1, keyword: "top 20rated")
 
