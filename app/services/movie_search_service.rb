@@ -1,8 +1,7 @@
-class MovieService
+class MovieSearchService
   def conn
     conn = Faraday.new(url: "https://api.themoviedb.org/3/") do |faraday|
       faraday.params["api_key"] = Rails.application.credentials.movies[:key]
-      faraday.params["append_to_response"] = "credits,reviews"
     end
   end
 
@@ -11,7 +10,12 @@ class MovieService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def details(movie_id)
-    get_url("movie/#{@movie_id}")
+  def top_rated_movies
+    get_url("movie/top_rated")
+  end
+
+  def movies_by_title(title)
+    search = title.gsub(" ", "%20")
+    get_url("search/movie?query=#{search}&limit=20")
   end
 end
