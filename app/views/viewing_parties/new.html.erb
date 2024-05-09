@@ -4,14 +4,19 @@
 <b> Movie: <%= @facade.movie.title %>
 
 <%= form_with url: user_movie_viewing_parties_path(@user, @facade.movie.id), local: true do |f| %>
-  <p><%= f.label :duration, 'Duration of Party (mins)' %></p>
-  <p><%= f.number_field :duration, value: @facade.movie.runtime, min: @facade.movie.runtime %></p>
+  <p><%= f.label :duration, 'Duration (in mins)' %></p>
+  <p><%= f.number_field :duration, value: @facade.movie.runtime_mins %></p>
 
   <p><%= f.label :date, 'Date' %></p>
   <p><%= f.date_field :date %></p>
 
   <p><%= f.label :start_time, 'Start Time' %></p>
   <p><%= f.time_field :start_time %></p>
+
+  <p><%= f.label :email_addresses, "Please enter email addresses for anyone you'd like to add to your viewing party" %></p>
+  <p><%= f.text_field :email_address1 %></p>
+  <p><%= f.text_field :email_address2 %></p>
+  <p><%= f.text_field :email_address3 %></p>
 
      <%= f.submit "Create Viewing Party" %>
 <% end %>
