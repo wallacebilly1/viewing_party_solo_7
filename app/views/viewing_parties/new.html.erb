@@ -6,6 +6,7 @@
 <%= form_with url: user_movie_viewing_parties_path(@user, @facade.movie.id), local: true do |f| %>
   <p><%= f.label :duration, 'Duration (in mins)' %></p>
   <p><%= f.number_field :duration, value: @facade.movie.runtime_mins %></p>
+     <%= f.hidden_field :movie_duration, value: @facade.movie.runtime_mins %>
 
   <p><%= f.label :date, 'Date' %></p>
   <p><%= f.date_field :date %></p>
