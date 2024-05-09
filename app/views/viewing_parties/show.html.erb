@@ -1,0 +1,29 @@
+<h1> Viewing Party </h1><br>
+
+<section id="party-details">
+  <ul>
+    </li> Date: <%= @viewing_party.date %> </li>
+    </li> Time: <%= @viewing_party.start_time %> </li>
+    </li> Duration: <%= @viewing_party.duration %> </li>
+  </ul>
+</section>
+
+<h2> <%= @facade.movie.title %> </h2>
+
+<section id="rent">
+  <h3> Where to Rent: </h3> 
+  <% @facade.where_to_rent.each do |image|%>
+    <%= image_tag image %>
+  <% end %>
+</section>
+
+<section id="buy">
+  <h3> Where to Buy: </h3>
+    <% @facade.where_to_buy.each do |image|%>
+    <%= image_tag image %>
+  <% end %>
+</section>
+
+
+<p> Buy/Rent data provided by JustWatch </p>
+

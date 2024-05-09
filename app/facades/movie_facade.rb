@@ -14,4 +14,14 @@ class MovieFacade
   def top_movie_cast
     @movie.cast[0..9]
   end
+
+  def where_to_buy
+    service = MovieService.new
+    service.movie_logos_for_purchase(@movie_id)
+  end
+
+  def where_to_rent
+    service = MovieService.new
+    service.movie_logos_for_rental(@movie_id)
+  end
 end
