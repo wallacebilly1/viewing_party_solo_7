@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Show User Dashboard', type: :feature do
-  describe 'When user visits their user dashboard"' do
+  describe 'When user visits their user dashboard' do
     before(:each) do
       @user1 = User.create!(name: 'Sam', email: 'sam@email.com')
       @user2 = User.create!(name: 'Tommy', email: 'tommy@email.com')
-      @party1 = ViewingParty.create!(date: "06/30/2024", start_time: "07:25", duration: 200, movie_id: 121, movie_duration: 179)
-      @party2 = ViewingParty.create!(date: "07/15/2024", start_time: "06:35", duration: 220, movie_id: 122, movie_duration: 201)
+      @party1 = ViewingParty.create!(date: "2024/06/30", start_time: "07:25", duration: 200, movie_id: 121, movie_duration: 179)
+      @party2 = ViewingParty.create!(date: "2024/07/15", start_time: "06:35", duration: 220, movie_id: 122, movie_duration: 201)
       UserParty.create!(user_id: @user1.id, viewing_party_id: @party1.id, host: true)
       UserParty.create!(user_id: @user2.id, viewing_party_id: @party1.id, host: false)
 

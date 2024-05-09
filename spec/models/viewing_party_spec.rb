@@ -4,7 +4,7 @@ RSpec.describe ViewingParty, type: :model do
   before(:each) do
       @user_1 = User.create!(name: 'Sam', email: 'sam@email.com')
       @user_2 = User.create!(name: 'Tommy', email: 'tommy@email.com')
-      @party = ViewingParty.create!(date: "06/30/2024", start_time: "07:25", duration: 175, movie_id: 1, movie_duration: 170)
+      @party = ViewingParty.create!(date: "2024/06/30", start_time: "07:25", duration: 175, movie_id: 1, movie_duration: 170)
       UserParty.create!(user_id: @user_1.id, viewing_party_id: @party.id, host: true)
       UserParty.create!(user_id: @user_2.id, viewing_party_id: @party.id, host: false)
   end
@@ -15,14 +15,14 @@ RSpec.describe ViewingParty, type: :model do
     it { should validate_presence_of :duration }
     
     it 'duration cannot be shorter than movie length' do
-      viewing_party = ViewingParty.new(date: "06/30/2024", start_time: "07:25", duration: 20, movie_id: 1, movie_duration: 170)
+      viewing_party = ViewingParty.new(date: "2024/06/30", start_time: "07:25", duration: 20, movie_id: 1, movie_duration: 170)
 
       assert viewing_party.invalid?
       assert_equal ["must be longer than the movie length"], viewing_party.errors[:duration]
     end
 
     it 'date cannot be in past' do
-      viewing_party = ViewingParty.new(date: "06/30/2020", start_time: "07:25", duration: 20, movie_id: 1, movie_duration: 170)
+      viewing_party = ViewingParty.new(date: "2020/06/30", start_time: "07:25", duration: 20, movie_id: 1, movie_duration: 170)
 
       assert viewing_party.invalid?
       assert_equal ["can't be in the past"], viewing_party.errors[:date]
