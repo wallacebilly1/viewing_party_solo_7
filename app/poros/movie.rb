@@ -2,7 +2,7 @@ class Movie
   attr_reader :id,
               :title,
               :vote_average,
-              :runtime,
+              :runtime_mins,
               :genres,
               :summary,
               :cast,
@@ -12,8 +12,8 @@ class Movie
   def initialize(movie_data)
     @id = movie_data[:id]
     @title = movie_data[:original_title]
-    @vote_average = movie_data[:vote_average]
-    @runtime = movie_data[:runtime]
+    @vote_average = movie_data[:vote_average].round(1)
+    @runtime_mins = movie_data[:runtime]
     @genres = movie_data[:genres]
     @summary = movie_data[:overview]
     # .dig returns nil if the key is not present, meaning you don't have to initialize with these attributes
@@ -23,9 +23,9 @@ class Movie
   end
 
   def runtime
-    if @runtime != nil
-      hours = @runtime / 60
-      minutes = @runtime % 60
+    if @runtime_mins != nil
+      hours = @runtime_mins / 60
+      minutes = @runtime_mins % 60
 
       formatted_runtime = ""
       formatted_runtime += "#{hours}hr " if hours > 0
