@@ -16,7 +16,7 @@ RSpec.describe 'Show User Dashboard', type: :feature do
       visit user_path(@user1)
     end
 
-    it 'They see a Discover Movies button that redirects to a discover page' do
+    it 'They see a Discover Movies button that redirects to a discover page', :vcr do
       expect(page).to have_button('Discover Movies')
 
       click_button 'Discover Movies'
@@ -24,41 +24,37 @@ RSpec.describe 'Show User Dashboard', type: :feature do
       expect(current_path).to eq(user_discover_index_path(@user1))
     end
 
-    it 'They see all viewing parties they have been invited to or are hosting' do
+    it 'They see all viewing parties they have been invited to or are hosting', :vcr do
       expect(page).to have_content("Lord of the Rings: The Two Towers")
       expect(page).to have_content("Lord of the Rings: The Return of the King")
     end
 
-    it 'They see all information about a viewing party they are hosting' do
-      within "#hosting" do
+    it 'They see all information about a viewing party they are hosting', :vcr do
+      within "#party-#{@party1.id}" do
         expect(page).to have_css("img")
         expect(page).to have_content("The Lord of the Rings: The Two Towers")
         expect(page).to have_link("The Lord of the Rings: The Two Towers")
-        expect(page).to have_content("06/30/2024 - 07:25AM")
+        expect(page).to have_content("2024/06/30 at 07:25")
         expect(page).to have_content("Host: Sam")
-        within "#invitees" do
-          expect(page).to have_content("Sam Tommy")
-        end
+        expect(page).to have_content("Who's Coming?\nSam Tommy")
       end
     end
 
-    it 'They see all information about a viewing party they are invited to' do
-      within "#attending" do
+    it 'They see all information about a viewing party they are invited to', :vcr do
+      within "#party-#{@party2.id}" do
         expect(page).to have_css("img")
         expect(page).to have_content("The Lord of the Rings: The Return of the King")
         expect(page).to have_link("The Lord of the Rings: The Return of the King")
-        expect(page).to have_content("07/15/2024 - 06:35AM")
+        expect(page).to have_content("2024/07/15 at 06:35")
         expect(page).to have_content("Host: Tommy")
-        within "#invitees" do
-          expect(page).to have_content("Tommy Sam")
-          expect(find(:css, ".bold_user").text).to have_content("Sam")
-        end
+        expect(page).to have_content("Who's Coming?\nSam Tommy")
+        expect(find(:css, ".bold_user").text).to have_content("Sam")
       end
     end
 
-    it 'They are taken to the movie show page when clicking on the title of a movie' do
+    it 'They are taken to the movie show page when clicking on the title of a movie', :vcr do
       click_on("The Lord of the Rings: The Two Towers")
-      expect(current_path).to eq(user_movie_path(@user1, 122))
+      expect(current_path).to eq(user_movie_path(@user1, 121))
     end
   end
 end

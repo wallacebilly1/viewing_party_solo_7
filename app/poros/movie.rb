@@ -5,6 +5,7 @@ class Movie
               :runtime_mins,
               :genres,
               :summary,
+              :poster_url,
               :cast,
               :review_count,
               :reviews
@@ -16,6 +17,7 @@ class Movie
     @runtime_mins = movie_data[:runtime]
     @genres = movie_data[:genres]
     @summary = movie_data[:overview]
+    @poster_url = "https://image.tmdb.org/t/p/w200#{movie_data[:poster_path]}"
     # .dig returns nil if the key is not present, meaning you don't have to initialize with these attributes
     @cast = movie_data.dig(:credits, :cast)
     @review_count = movie_data.dig(:reviews, :total_results)
