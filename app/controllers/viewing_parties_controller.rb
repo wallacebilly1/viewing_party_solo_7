@@ -19,11 +19,11 @@ class ViewingPartiesController < ApplicationController
       redirect_to user_path(@host)
       
       if params[:email_address1].present? && User.find_by(email: params[:email_address1])
-        UserParty.create({user_id: User.find_by(email: params[:email_address1]), viewing_party_id: viewing_party.id, host: false})
+        UserParty.create({user_id: User.find_by(email: params[:email_address1]).id, viewing_party_id: viewing_party.id, host: false})
       elsif params[:email_address2].present? && User.find_by(email: params[:email_address2])
-        UserParty.create({user_id: User.find_by(email: params[:email_address2]), viewing_party_id: viewing_party.id, host: false})
+        UserParty.create({user_id: User.find_by(email: params[:email_address2]).id, viewing_party_id: viewing_party.id, host: false})
       elsif params[:email_address3].present? && User.find_by(email: params[:email_address3])
-        UserParty.create({user_id: User.find_by(email: params[:email_address3]), viewing_party_id: viewing_party.id, host: false})
+        UserParty.create({user_id: User.find_by(email: params[:email_address3]).id, viewing_party_id: viewing_party.id, host: false})
       end
     else
       flash[:error] = "#{error_message(viewing_party.errors)}"

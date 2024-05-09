@@ -102,7 +102,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
       fill_in "email_address3", with: 'mary@email.com'
     
       click_button 'Create Viewing Party'
-  
+
       visit user_path(@user2)
       # add back in after i've created added to the user show page view
       # expect(page).to have_content("The Lord of the Rings: The Two Towers")
