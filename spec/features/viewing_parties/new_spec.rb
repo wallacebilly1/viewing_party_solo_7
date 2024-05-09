@@ -27,7 +27,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
     
     it "When they fill in the form and submit, they're taken to that user's dashboard, with that user indicated as the host" do
       fill_in "Duration", with: '200'
-      fill_in "Date", with: '05/30/2024'
+      fill_in "Date", with: '2024/05/30'
       fill_in "Start Time", with: '6:00PM'
       fill_in "email_address1", with: 'sam@email.com'
       fill_in "email_address2", with: 'joe@email.com'
@@ -36,16 +36,11 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
       click_button 'Create Viewing Party'
   
       expect(current_path).to eq(user_path(@user1))
-
-      # add back in after i've created added to the user show page view
-      # within "#party-240530-121" do
-      #   expect(page).to have_content("Hosting")
-      # end
     end
 
     it 'when they enter a duration less than the movie length' do
       fill_in "Duration", with: 20
-      fill_in "Date", with: '05/30/2024'
+      fill_in "Date", with: '2024/05/30'
       fill_in "Time", with: '6:00PM'
       fill_in "email_address1", with: 'sam@email.com'
 
@@ -57,7 +52,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
     it 'When they fill in form with missing information' do
       fill_in "Duration", with: '200'
-      fill_in "Date", with: '05/30/2024'
+      fill_in "Date", with: '2024/05/30'
       fill_in "Time", with: ''
       fill_in "email_address1", with: 'sam@email.com'
 
@@ -69,7 +64,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
     it 'When they fill in form with a date that has passed' do
       fill_in "Duration", with: '200'
-      fill_in "Date", with: '01/01/2000'
+      fill_in "Date", with: '2000/01/01'
       fill_in "Time", with: '6:00PM'
       fill_in "email_address1", with: 'sam@email.com'
 
@@ -85,7 +80,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
     it 'They can create a viewing party without guests' do
       fill_in "Duration", with: '200'
-      fill_in "Date", with: '05/30/2024'
+      fill_in "Date", with: '2024/05/30'
       fill_in "Time", with: '6:00PM'
     
       click_button 'Create Viewing Party'
@@ -95,7 +90,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
     it 'When added as a guest to a viewing party, that viewing party shows up on that users dashboard' do
       fill_in "Duration", with: '200'
-      fill_in "Date", with: '05/30/2024'
+      fill_in "Date", with: '2024/05/30'
       fill_in "Time", with: '6:00PM'
       fill_in "email_address1", with: 'sam@email.com'
       fill_in "email_address2", with: 'joe@email.com'
@@ -104,12 +99,6 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
       click_button 'Create Viewing Party'
 
       visit user_path(@user2)
-      # add back in after i've created added to the user show page view
-      # expect(page).to have_content("The Lord of the Rings: The Two Towers")
-      
-      # within "#party-240530-121" do
-      #   expect(page).to have_content("Invited")
-      # end
     end
     
   end

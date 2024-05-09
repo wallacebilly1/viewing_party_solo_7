@@ -1,5 +1,5 @@
 class MovieFacade  
-  def initialize(movie_id)
+  def initialize(movie_id = '')
     @movie_id = movie_id
   end
 
@@ -23,5 +23,11 @@ class MovieFacade
   def where_to_rent
     service = MovieService.new
     service.movie_logos_for_rental(@movie_id)
+  end
+
+  def viewing_party_movie(movie_id)
+    service = MovieService.new
+    json = service.details(movie_id)
+    Movie.new(json)
   end
 end
