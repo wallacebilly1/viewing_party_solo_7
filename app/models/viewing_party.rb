@@ -19,7 +19,7 @@ class ViewingParty < ApplicationRecord
   end
 
   def date_cannot_be_in_past
-    if date.present? && Date.strptime(date, "%m/%d/%Y") < Date.today
+    if date.present? && Date.parse(date) < Date.today
       errors.add(:date, "can't be in the past")
     end
   end
