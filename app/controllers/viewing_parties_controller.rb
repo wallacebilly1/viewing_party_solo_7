@@ -31,6 +31,11 @@ class ViewingPartiesController < ApplicationController
     end
   end
 
+  def show
+    @facade = MovieFacade.new(params[:movie_id])
+    @viewing_party = ViewingParty.find(params[:id])
+  end
+
   # private
   # def party_params
   #   params.permit(:duration, :date, :start_time, :movie_id)
