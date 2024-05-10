@@ -2,6 +2,7 @@
 
 <%= button_to "Return to Discover Page", user_discover_index_path(@user), method: :get %>
 <%= button_to "Create Viewing Party for #{@facade.movie.title}", new_user_movie_viewing_party_path(@user.id, @facade.movie.id), method: :get %>
+<%= button_to "Get Similar Movies", user_movie_similar_index_path(@user, @facade.movie.id), method: :get %>
 
 <ul>
   <li> Vote Average: <%= @facade.movie.vote_average %> </li>
