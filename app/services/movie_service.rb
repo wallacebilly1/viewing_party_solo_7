@@ -14,6 +14,10 @@ class MovieService
     get_url("movie/#{movie_id}?append_to_response=credits,reviews")
   end
 
+  def similar(movie_id)
+    get_url("movie/#{movie_id}/similar")
+  end
+
   def provider_data(movie_id)
     get_url("movie/#{movie_id}/watch/providers")
   end
