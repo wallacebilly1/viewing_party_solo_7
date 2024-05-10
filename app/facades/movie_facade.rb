@@ -11,6 +11,18 @@ class MovieFacade
     @movie = Movie.new(json)
   end
 
+  def similar 
+    service = MovieService.new
+
+    json = service.similar(@movie_id)
+
+    @movies = json[:results].map do |movie_data|
+      Movie.new(movie_data)
+    end
+
+    @movies[0..5]
+  end
+
   def top_movie_cast
     @movie.cast[0..9]
   end

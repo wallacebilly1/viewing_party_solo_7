@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :discover, only: [:index]
     resources :movies, only: [:index, :show] do
       resources :viewing_parties, only: [:new, :create, :show]
+      resources :similar, only: [:index]
     end
   end
 end

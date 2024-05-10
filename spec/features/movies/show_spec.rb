@@ -5,7 +5,7 @@ RSpec.describe 'Movie Show Page', type: :feature do
     before(:each) do
       @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com')
 
-      visit user_movie_path(@user1, "121")
+      visit user_movie_path(@user1, 121)
     end
 
     it 'They see a button to Create a Viewing Party' do
@@ -44,6 +44,14 @@ RSpec.describe 'Movie Show Page', type: :feature do
         expect(page).to have_content("Author: NeoBrowser")
         expect(page).to have_content("Review: Peter Jackson has always maintained")
       end
+    end
+
+    it "They see a link to 'Get Similar Movies'" do
+      expect(page).to have_selector(:link_or_button, 'Get Similar Movies')
+
+      click_on("Get Similar Movies")
+
+      expect(current_path).to eq user_movie_similar_index_path(@user1, 121)
     end
   end
 end
