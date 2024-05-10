@@ -13,6 +13,8 @@ RSpec.describe Movie do
       overview: "Frodo and his gang, etc.",
       vote_average: 8.4,
       runtime: 179,
+      poster_path: "/5M0j0B18abtBI5gi2RhfjjurTqb.jpg",
+      release_date: "1991-07-03",
       credits: {
         cast: [
           { name: "Elijah Wood", character: "Frodo Baggins" },
@@ -44,6 +46,11 @@ RSpec.describe Movie do
     expect(@movie.id).to eq(121)
     expect(@movie.title).to eq("The Lord of the Rings: The Two Towers")
     expect(@movie.vote_average).to eq(8.4)
+    expect(@movie.runtime_mins).to eq(179)
+    expect(@movie.summary).to eq("Frodo and his gang, etc.")
+    expect(@movie.poster_url).to eq("https://image.tmdb.org/t/p/w200/5M0j0B18abtBI5gi2RhfjjurTqb.jpg")
+    expect(@movie.release_date).to eq("1991-07-03")
+    expect(@movie.review_count).to eq(2)
   end
 
   it 'formats runtime in xhr xxmin format' do

@@ -3,13 +3,10 @@ class Movie
               :title,
               :vote_average,
               :runtime_mins,
-              :genres,
               :summary,
               :poster_url,
               :release_date,
-              :cast,
-              :review_count,
-              :reviews
+              :review_count
 
   def initialize(movie_data)
     @id = movie_data[:id]

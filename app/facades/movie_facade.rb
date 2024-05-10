@@ -20,11 +20,11 @@ class MovieFacade
       Movie.new(movie_data)
     end
 
-    @movies[0..5]
+    @movies[0..4]
   end
 
   def top_movie_cast
-    @movie.cast[0..9]
+    movie.cast[0..9]
   end
 
   def where_to_buy
