@@ -13,7 +13,7 @@ end
 
 # create Parties
 5.times do 
-   ViewingParty.create!(duration: rand(0..240), date: Faker::Date.forward(days: rand(1..14)), start_time: Time.new.strftime("%H:%M"))
+   ViewingParty.create!(duration: rand(200..240), date: Faker::Date.forward(days: rand(1..14)), start_time: Time.new.strftime("%H:%M"))
 end
 
 # set Hosts 

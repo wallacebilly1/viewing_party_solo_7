@@ -13,7 +13,7 @@ class ViewingParty < ApplicationRecord
   end
 
   def duration_cannot_be_shorter_than_movie_length
-    if duration.present? && duration < movie_duration
+    if duration.present? && movie_duration.present? && duration < movie_duration
       errors.add(:duration, "must be longer than the movie length")
     end
   end
