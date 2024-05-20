@@ -30,7 +30,7 @@ RSpec.describe "Logging In" do
     fill_in :password, with: "123"
   
     click_on "Log In"
-  
+    save_and_open_page
     expect(current_path).to eq(login_path)
   
     expect(page).to have_content("Sorry, your credentials are bad.")
