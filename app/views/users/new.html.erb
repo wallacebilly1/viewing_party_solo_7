@@ -1,9 +1,11 @@
-<%= form_with model: @user, url: users_path, method: :post, data: {turbo: false}, local: true do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, class: "form-control" %><br>
-  <%= f.label :email %>
-  <%= f.text_field :email, class: "form-control" %><br>
-
-
-  <%= f.submit 'Create New User', class: "btn btn-primary" %>
+<%= form_with model: @user do |form| %>
+  <%= form.label :name, 'Name:' %>
+  <%= form.text_field :name %>
+  <%= form.label :email, 'Email:' %>
+  <%= form.text_field :email %>
+  <%= form.label :password, 'Password:' %>
+  <%= form.password_field :password %>
+  <%= form.label :password_confirmation, 'Password Confirmation:' %>
+  <%= form.password_field :password_confirmation %>
+  <%= form.submit 'Create New User', class: "btn btn-primary" %>
 <% end %>
