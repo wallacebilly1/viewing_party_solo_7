@@ -8,12 +8,22 @@
 
 # create Users
 10.times do 
-   User.create!(name: Faker::Name.name, email: Faker::Internet.email)
+   password = Faker::Internet.password
+   User.create!(
+      name: Faker::Name.name, 
+      email: Faker::Internet.email, 
+      password: password, 
+      password_confirmation: password
+   )
 end
 
 # create Parties
 5.times do 
-   ViewingParty.create!(duration: rand(200..240), date: Faker::Date.forward(days: rand(1..14)), start_time: Time.new.strftime("%H:%M"))
+   ViewingParty.create!(
+      duration: rand(200..240), 
+      date: Faker::Date.forward(days: rand(1..14)), 
+      start_time: Time.new.strftime("%H:%M")
+   )
 end
 
 # set Hosts 

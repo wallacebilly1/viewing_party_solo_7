@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Movie Show Page', type: :feature do
   describe 'When user visits a movies show page', :vcr do
     before(:each) do
-      @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com')
+      @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com', password: "password", password_confirmation: "password")
 
       visit user_movie_path(@user1, 121)
     end

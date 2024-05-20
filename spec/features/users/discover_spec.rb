@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Discover Page', type: :feature do
   describe 'When user visits their discover page' do
     before(:each) do
-      @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com')
-
+      @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com', password: "password", password_confirmation: "password")
       visit user_discover_index_path(@user1)
     end
 

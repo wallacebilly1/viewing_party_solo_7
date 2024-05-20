@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Create New User', type: :feature do
   describe 'When user visits "/register"' do
     before(:each) do
-      @user = User.create!(name: 'Tommy', email: 'tommy@email.com')
-      @user = User.create!(name: 'Sam', email: 'sam@email.com')
+      @user = User.create!(name: 'Tommy', email: 'tommy@email.com', password: "password", password_confirmation: "password")
+      @user = User.create!(name: 'Sam', email: 'sam@email.com', password: "password", password_confirmation: "password")
 
       visit register_user_path
     end
@@ -24,9 +24,11 @@ RSpec.describe 'Create New User', type: :feature do
       expect(page).to have_selector(:link_or_button, 'Create New User')    
     end
     
-    it 'When they fill in the form with their name and email then they are taken to their dashboard page "/users/:id"' do
+    it 'When they fill in the form with their name, email, password, and matching password confirmation then they are taken to their dashboard page "/users/:id"' do
       fill_in "user[name]", with: 'Chris'
       fill_in "user[email]", with: 'chris@email.com'
+      fill_in "user[password]", with: 'password'
+      fill_in "user[password_confirmation]", with: 'password'
 
       click_button 'Create New User'
     
@@ -39,6 +41,8 @@ RSpec.describe 'Create New User', type: :feature do
     it 'when they fill in form with information, email (non-unique), submit, redirects to user show page' do
       fill_in "user[name]", with: 'Tommy'
       fill_in "user[email]", with: 'tommy@email.com'
+      fill_in "user[password]", with: 'password'
+      fill_in "user[password_confirmation]", with: 'password'
 
       click_button 'Create New User'
 
@@ -86,6 +90,15 @@ RSpec.describe 'Create New User', type: :feature do
       expect(page).to have_content('Email is invalid')
     end
 
-    
+    it 'when they fill in form with non-matching passwords' do
+      fill_in "user[name]", with: "Billy"
+      fill_in "user[email]", with: "billy@test.com"
+      fill_in "user[password]", with: "password"
+      fill_in "user[password_confirmation]", with: "notpassword"
+      click_button 'Create New User'
+
+      expect(current_path).to eq(register_user_path)
+      expect(page).to have_content("doesn't match Password")
+    end
   end
 end
