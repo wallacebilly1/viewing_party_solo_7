@@ -90,6 +90,15 @@ RSpec.describe 'Create New User', type: :feature do
       expect(page).to have_content('Email is invalid')
     end
 
-    
+    it 'when they fill in form with non-matching passwords' do
+      fill_in "user[name]", with: "Billy"
+      fill_in "user[email]", with: "billy@test.com"
+      fill_in "user[password]", with: "password"
+      fill_in "user[password_confirmation]", with: "notpassword"
+      click_button 'Create New User'
+
+      expect(current_path).to eq(register_user_path)
+      expect(page).to have_content("doesn't match Password")
+    end
   end
 end
