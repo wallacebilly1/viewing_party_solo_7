@@ -10,6 +10,7 @@ describe "Admin login" do
                           role: 2)
 
       visit login_path
+
       fill_in :email, with: admin.email
       fill_in :password, with: admin.password
       click_button 'Log In'
