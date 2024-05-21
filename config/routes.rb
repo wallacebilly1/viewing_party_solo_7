@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # post '/login', to: 'users#login_user'
   post '/login', to: 'sessions#create'
 
+  post '/logout', to: 'sessions#destroy'
+
 
   resources :users, only: [:show, :create] do
     resources :discover, only: [:index]

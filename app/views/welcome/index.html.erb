@@ -8,7 +8,7 @@
    <% end %>
 </ul>
 
-<%= button_to 'Create New User', register_user_path, method: :get, class: "btn btn-lg btn-outline-secondary" %><br>
-<%= button_to 'Log In Here', login_path, method: :get, class: "btn btn-lg btn-outline-secondary" %><br>
-
-<%= cookies.encrypted[:greeting] %>
+<% if session[:user_id] == nil %>
+   <%= button_to 'Create New User', register_user_path, method: :get, class: "btn btn-lg btn-outline-secondary" %><br>
+   <%= button_to 'Log In Here', login_path, method: :get, class: "btn btn-lg btn-outline-secondary" %><br>
+<% end %>

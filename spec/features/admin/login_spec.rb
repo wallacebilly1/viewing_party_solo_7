@@ -22,9 +22,11 @@ end
 
 describe "as default user" do
   it 'does not allow default user to see admin dashboard index' do
-    user = User.create(email: "fern@gully.com",
-                       password: "password",
-                       role: 0)
+    user = User.create(name: "jim",
+                      email: "superus3r@awesome-site.com",
+                      password: "super_secret_passw0rd",
+                      password_confirmation: "super_secret_passw0rd",
+                      role: 0)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 

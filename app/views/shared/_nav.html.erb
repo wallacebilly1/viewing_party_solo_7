@@ -3,6 +3,9 @@
     <ul class="nav navbar-nav pull-right">
       <li><%= link_to 'Home', root_path, style: 'pull-right' %> 
       <li><%= " - location: #{cookies[:location]}" %>
+      <% if session[:user_id] != nil %>
+        <li><%= button_to 'Log Out', logout_path, method: :post, class: "btn btn-lg btn-outline-secondary" %>
+      <% end %>
     </ul>
   </nav>
 </div>
