@@ -15,7 +15,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_on "Log In"
 
-      visit new_user_movie_viewing_party_path(@user1, 121)
+      visit new_movie_viewing_party_path(121)
     end
     
     it 'They see the title of the movie' do
@@ -42,7 +42,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_button 'Create Viewing Party'
 
-      expect(current_path).to eq(user_path(@user1))
+      expect(current_path).to eq(user_dashboard_path)
     end
 
     it 'when they enter a duration less than the movie length' do
@@ -53,7 +53,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_button 'Create Viewing Party'
 
-      expect(current_path).to eq(new_user_movie_viewing_party_path(@user1, 121))
+      expect(current_path).to eq(new_movie_viewing_party_path(121))
       expect(page).to have_content('Duration must be longer than the movie length')
     end
 
@@ -65,7 +65,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_button 'Create Viewing Party'
 
-      expect(current_path).to eq(new_user_movie_viewing_party_path(@user1, 121))
+      expect(current_path).to eq(new_movie_viewing_party_path(121))
       expect(page).to have_content("Start time can't be blank")
     end
 
@@ -77,7 +77,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_button 'Create Viewing Party'
 
-      expect(current_path).to eq(new_user_movie_viewing_party_path(@user1, 121))
+      expect(current_path).to eq(new_movie_viewing_party_path(121))
       expect(page).to have_content("Date can't be in the past")
     end
 
@@ -92,7 +92,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_button 'Create Viewing Party'
   
-      expect(current_path).to eq(user_path(@user1))
+      expect(current_path).to eq(user_dashboard_path)
     end
 
     it 'When added as a guest to a viewing party, that viewing party shows up on that users dashboard' do
@@ -105,8 +105,18 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
     
       click_button 'Create Viewing Party'
 
-      visit user_path(@user2)
+      click_on "Log Out"
+
+      visit login_path
+
+      fill_in :email, with: @user2.email
+      fill_in :password, with: @user2.password
+
+      click_on "Log In"
+
+      visit user_dashboard_path
+
+      expect(page).to have_content("The Lord of the Rings: The Two Towers")
     end
-    
   end
 end

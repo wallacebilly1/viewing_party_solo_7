@@ -5,7 +5,14 @@ RSpec.describe 'Movie Show Page', type: :feature do
     before(:each) do
       @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com', password: "password", password_confirmation: "password")
 
-      visit user_movie_path(@user1, 121)
+      visit login_path
+
+      fill_in :email, with: @user1.email
+      fill_in :password, with: @user1.password
+
+      click_on "Log In"
+
+      visit movie_path(121)
     end
 
     it 'They see a button to Create a Viewing Party' do
@@ -13,7 +20,7 @@ RSpec.describe 'Movie Show Page', type: :feature do
 
       click_on("Create Viewing Party for The Lord of the Rings: The Two Towers")
 
-      expect(current_path).to eq(new_user_movie_viewing_party_path(@user1, 121))
+      expect(current_path).to eq(new_movie_viewing_party_path(121))
     end
 
     it 'They see a button to return to the Discover page' do
@@ -21,7 +28,7 @@ RSpec.describe 'Movie Show Page', type: :feature do
 
       click_on("Return to Discover Page")
 
-      expect(current_path).to eq(user_discover_index_path(@user1))
+      expect(current_path).to eq(discover_index_path)
     end
 
     it 'They see all relevant information for that movie' do
@@ -29,12 +36,12 @@ RSpec.describe 'Movie Show Page', type: :feature do
       expect(page).to have_content("Vote Average: 8.4")
       expect(page).to have_content("Runtime: 2hr 59min")
       expect(page).to have_content("Genre(s): Adventure, Fantasy, Action")
-      expect(page).to have_content("Summary: Frodo and Sam are trekking")
+      expect(page).to have_content("Summary: Frodo Baggins and the other members")
       
       within "#actors" do
         expect(page).to have_content("Cast:")
         expect(page).to have_content("Elijah Wood as Frodo Baggins")
-        expect(page).to have_content("Sean Astin as Samwise Gamgee")
+        expect(page).to have_content("Sean Astin as Samwise 'Sam' Gamgee")
         expect(page).to have_css("div", between: 1..10)
       end
 
@@ -51,7 +58,7 @@ RSpec.describe 'Movie Show Page', type: :feature do
 
       click_on("Get Similar Movies")
 
-      expect(current_path).to eq user_movie_similar_index_path(@user1, 121)
+      expect(current_path).to eq movie_similar_index_path(121)
     end
   end
 end

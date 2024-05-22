@@ -3,14 +3,13 @@ require 'rails_helper'
 RSpec.describe 'Create New User', type: :feature do
   describe 'When user visits "/register"' do
     before(:each) do
-      @user = User.create!(name: 'Tommy', email: 'tommy@email.com', password: "password", password_confirmation: "password")
-      @user = User.create!(name: 'Sam', email: 'sam@email.com', password: "password", password_confirmation: "password")
+      @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com', password: "password", password_confirmation: "password")
+      @user2 = User.create!(name: 'Sam', email: 'sam@email.com', password: "password", password_confirmation: "password")
 
       visit register_user_path
     end
     
     it 'They see a Home link that redirects to landing page' do
-
       expect(page).to have_link('Home')
 
       click_link "Home"
@@ -34,7 +33,7 @@ RSpec.describe 'Create New User', type: :feature do
     
       new_user = User.last
 
-      expect(current_path).to eq(user_path(new_user))
+      expect(current_path).to eq(user_dashboard_path)
       expect(page).to have_content('Successfully Created New User')
     end
 

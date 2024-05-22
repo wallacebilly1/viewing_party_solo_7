@@ -20,7 +20,7 @@ RSpec.describe 'Show User Dashboard', type: :feature do
       
       click_on "Log In"
 
-      visit user_path(@user1)
+      visit user_dashboard_path
     end
 
     it 'They see a Discover Movies button that redirects to a discover page', :vcr do
@@ -28,7 +28,7 @@ RSpec.describe 'Show User Dashboard', type: :feature do
 
       click_button 'Discover Movies'
 
-      expect(current_path).to eq(user_discover_index_path(@user1))
+      expect(current_path).to eq(discover_index_path)
     end
 
     it 'They see all viewing parties they have been invited to or are hosting', :vcr do
@@ -61,7 +61,7 @@ RSpec.describe 'Show User Dashboard', type: :feature do
 
     it 'They are taken to the movie show page when clicking on the title of a movie', :vcr do
       click_on("The Lord of the Rings: The Two Towers")
-      expect(current_path).to eq(user_movie_path(@user1, 121))
+      expect(current_path).to eq(movie_path(121))
     end
   end
 
@@ -80,8 +80,8 @@ RSpec.describe 'Show User Dashboard', type: :feature do
       visit root_path
     end
 
-    it 'They see a Discover Movies button that redirects to a discover page', :vcr do
-      visit user_path(@user2)
+    it 'They stay on the landing page and see an error message', :vcr do
+      visit user_dashboard_path
       
       expect(current_path).to eq(root_path)
 

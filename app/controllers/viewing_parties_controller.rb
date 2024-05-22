@@ -1,11 +1,10 @@
 class ViewingPartiesController < ApplicationController
   def new
-    @user = User.find(params[:user_id])
     @facade = MovieFacade.new(params[:movie_id])
   end
 
   def create
-    @host = User.find(params[:user_id])
+    @host = User.find(current_user.id)
     viewing_party = ViewingParty.new({
       duration: params[:duration],
       date: params[:date],
@@ -16,7 +15,7 @@ class ViewingPartiesController < ApplicationController
 
     if viewing_party.save
       UserParty.create({user_id: @host.id, viewing_party_id: viewing_party.id, host: true})
-      redirect_to user_path(@host)
+      redirect_to user_dashboard_path
       
       if params[:email_address1].present? && User.find_by(email: params[:email_address1])
         UserParty.create({user_id: User.find_by(email: params[:email_address1]).id, viewing_party_id: viewing_party.id, host: false})
@@ -27,7 +26,7 @@ class ViewingPartiesController < ApplicationController
       end
     else
       flash[:error] = "#{error_message(viewing_party.errors)}"
-      redirect_to new_user_movie_viewing_party_path(@host, params[:movie_id])
+      redirect_to new_movie_viewing_party_path(params[:movie_id])
     end
   end
 
