@@ -8,7 +8,7 @@
   <% @user.viewing_parties.each do |party| %>
     <div id="party-<%=party.id%>" class="viewing_party">
       <%= image_tag @facade.viewing_party_movie(party.movie_id).poster_url %> <br>
-      <%= link_to("#{@facade.viewing_party_movie(party.movie_id).title}", user_movie_path(@user.id, party.movie_id)) %>
+      <%= link_to("#{@facade.viewing_party_movie(party.movie_id).title}", movie_path(party.movie_id)) %>
       Party Time: <%= party.date %> at <%= party.start_time %><br>
       Host: <%= party.find_host.name %><br>
       Who's Coming? <br/>
