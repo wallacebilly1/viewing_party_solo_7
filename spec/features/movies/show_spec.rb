@@ -36,12 +36,12 @@ RSpec.describe 'Movie Show Page', type: :feature do
       expect(page).to have_content("Vote Average: 8.4")
       expect(page).to have_content("Runtime: 2hr 59min")
       expect(page).to have_content("Genre(s): Adventure, Fantasy, Action")
-      expect(page).to have_content("Summary: Frodo and Sam are trekking")
+      expect(page).to have_content("Summary: Frodo Baggins and the other members")
       
       within "#actors" do
         expect(page).to have_content("Cast:")
         expect(page).to have_content("Elijah Wood as Frodo Baggins")
-        expect(page).to have_content("Sean Astin as Samwise Gamgee")
+        expect(page).to have_content("Sean Astin as Samwise 'Sam' Gamgee")
         expect(page).to have_css("div", between: 1..10)
       end
 

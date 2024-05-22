@@ -9,7 +9,14 @@ RSpec.describe 'Show Viewing Party', type: :feature do
       UserParty.create!(user_id: @user1.id, viewing_party_id: @party.id, host: true)
       UserParty.create!(user_id: @user2.id, viewing_party_id: @party.id, host: false)
 
-      visit user_movie_viewing_party_path(@user1, 121, @party)
+      visit login_path
+
+      fill_in :email, with: @user1.email
+      fill_in :password, with: @user1.password
+  
+      click_on "Log In"
+
+      visit movie_viewing_party_path(121, @party)
     end
 
     it 'They see logos of video providers for where they can buy the movie' do
