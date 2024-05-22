@@ -8,6 +8,13 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
       @user3 = User.create!(name: 'Joe', email: 'joe@email.com', password: "password", password_confirmation: "password")
       @user4 = User.create!(name: 'Mary', email: 'mary@email.com', password: "password", password_confirmation: "password")
 
+      visit login_path
+
+      fill_in :email, with: @user1.email
+      fill_in :password, with: @user1.password
+
+      click_on "Log In"
+
       visit new_user_movie_viewing_party_path(@user1, 121)
     end
     
@@ -32,9 +39,9 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
       fill_in "email_address1", with: 'sam@email.com'
       fill_in "email_address2", with: 'joe@email.com'
       fill_in "email_address3", with: 'mary@email.com'
-    
+
       click_button 'Create Viewing Party'
-  
+
       expect(current_path).to eq(user_path(@user1))
     end
 
@@ -82,7 +89,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
       fill_in "Duration", with: '200'
       fill_in "Date", with: '2024/05/30'
       fill_in "Time", with: '6:00PM'
-    
+
       click_button 'Create Viewing Party'
   
       expect(current_path).to eq(user_path(@user1))
