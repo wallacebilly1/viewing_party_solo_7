@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    if session[:user_id] == @user.id
+    if current_user
       @facade = MovieFacade.new
     else
       redirect_to root_path
@@ -22,7 +21,7 @@ class UsersController < ApplicationController
     if new_user.save
       session[:user_id] = new_user.id
       flash[:success] = 'Successfully Created New User'
-      redirect_to user_path(new_user)
+      redirect_to user_dashboard_path
     else
       flash[:error] = "#{error_message(new_user.errors)}"
       redirect_to register_user_path

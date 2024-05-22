@@ -20,7 +20,7 @@ RSpec.describe 'Show User Dashboard', type: :feature do
       
       click_on "Log In"
 
-      visit user_path(@user1)
+      visit user_dashboard_path
     end
 
     it 'They see a Discover Movies button that redirects to a discover page', :vcr do
@@ -80,8 +80,8 @@ RSpec.describe 'Show User Dashboard', type: :feature do
       visit root_path
     end
 
-    it 'They see a Discover Movies button that redirects to a discover page', :vcr do
-      visit user_path(@user2)
+    it 'They stay on the landing page and see an error message', :vcr do
+      visit user_dashboard_path
       
       expect(current_path).to eq(root_path)
 

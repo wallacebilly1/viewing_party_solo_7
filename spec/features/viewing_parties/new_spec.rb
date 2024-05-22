@@ -42,7 +42,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_button 'Create Viewing Party'
 
-      expect(current_path).to eq(user_path(@user1))
+      expect(current_path).to eq(user_dashboard_path)
     end
 
     it 'when they enter a duration less than the movie length' do
@@ -92,7 +92,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_button 'Create Viewing Party'
   
-      expect(current_path).to eq(user_path(@user1))
+      expect(current_path).to eq(user_dashboard_path)
     end
 
     it 'When added as a guest to a viewing party, that viewing party shows up on that users dashboard' do
@@ -114,7 +114,7 @@ RSpec.describe 'Create New Viewing Party', type: :feature do
 
       click_on "Log In"
 
-      visit user_path(@user2)
+      visit user_dashboard_path
 
       expect(page).to have_content("The Lord of the Rings: The Two Towers")
     end

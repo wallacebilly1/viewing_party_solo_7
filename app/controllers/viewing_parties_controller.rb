@@ -15,7 +15,7 @@ class ViewingPartiesController < ApplicationController
 
     if viewing_party.save
       UserParty.create({user_id: @host.id, viewing_party_id: viewing_party.id, host: true})
-      redirect_to user_path(@host)
+      redirect_to user_dashboard_path
       
       if params[:email_address1].present? && User.find_by(email: params[:email_address1])
         UserParty.create({user_id: User.find_by(email: params[:email_address1]).id, viewing_party_id: viewing_party.id, host: false})

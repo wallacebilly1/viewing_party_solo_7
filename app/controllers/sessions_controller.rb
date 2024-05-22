@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       elsif user.manager?
         redirect_to root_path
       else
-        redirect_to user_path(user)
+        redirect_to user_dashboard_path
       end
     else
       flash[:error] = "Sorry, your credentials are bad."

@@ -1,11 +1,11 @@
-<h1> <%= "#{@user.name}'s Dashboard" %> </h1>
+<h1> <%= "#{current_user.name}'s Dashboard" %> </h1>
 
 <section class="discover_movies">
   <%= button_to "Discover Movies", discover_index_path, method: :get %>  
 </section>
 
 <section id="viewing_parties">
-  <% @user.viewing_parties.each do |party| %>
+  <% current_user.viewing_parties.each do |party| %>
     <div id="party-<%=party.id%>" class="viewing_party">
       <%= image_tag @facade.viewing_party_movie(party.movie_id).poster_url %> <br>
       <%= link_to("#{@facade.viewing_party_movie(party.movie_id).title}", movie_path(party.movie_id)) %>
@@ -14,7 +14,7 @@
       Who's Coming? <br/>
       <ol>
         <% party.users.each do |attendee| %>
-          <% if attendee == @user %>
+          <% if attendee == current_user %>
             <li class="bold_user"> <b> <%= attendee.name %> </b> </li>
           <% else %>
             <li> <%= attendee.name %> </li>
