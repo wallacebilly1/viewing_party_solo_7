@@ -4,7 +4,7 @@ class ViewingPartiesController < ApplicationController
   end
 
   def create
-    @host = User.find(params[:user_id])
+    @host = User.find(current_user.id)
     viewing_party = ViewingParty.new({
       duration: params[:duration],
       date: params[:date],
@@ -26,7 +26,7 @@ class ViewingPartiesController < ApplicationController
       end
     else
       flash[:error] = "#{error_message(viewing_party.errors)}"
-      redirect_to new_user_movie_viewing_party_path(@host, params[:movie_id])
+      redirect_to new_movie_viewing_party_path(params[:movie_id])
     end
   end
 
