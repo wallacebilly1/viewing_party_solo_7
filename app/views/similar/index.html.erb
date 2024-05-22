@@ -1,9 +1,9 @@
 <h1> Similar Movies to <%=@facade.movie.title %> </h1> <br>
-<%= button_to "Return to Discover Page", user_discover_index_path(@user), method: :get %>
+<%= button_to "Return to Discover Page", discover_index_path, method: :get %>
 
 <% @facade.similar.each do |movie| %>
   <div id="movie-<%= movie.id %>">
-    <h4><%= link_to "#{movie.title}", user_movie_path(@user.id, movie.id)%> </h4>
+    <h4><%= link_to "#{movie.title}", movie_path(movie.id)%> </h4>
     <%= image_tag movie.poster_url %> <br>
     <ul>
       <li> Vote Average: <%= movie.vote_average %> </li>
