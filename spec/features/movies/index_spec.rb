@@ -3,31 +3,39 @@ require 'rails_helper'
 RSpec.describe 'Movies Results Page', type: :feature do
   before(:each) do
     @user1 = User.create!(name: 'Tommy', email: 'tommy@email.com', password: "password", password_confirmation: "password")
+
+    visit login_path
+
+    fill_in :email, with: @user1.email
+    fill_in :password, with: @user1.password
+
+    click_on "Log In"
   end
 
   describe "When a user visits the Movies Index page via search or top 20" do
     it 'They see a button to Return to Discover Page', :vcr do
-      visit user_movies_path(@user1, keyword: "top 20rated")
+      visit movies_path(keyword: "top 20rated")
 
       expect(page).to have_button("Return to Discover Page")
 
       click_button("Return to Discover Page")
 
-      expect(current_path).to eq(user_discover_index_path(@user1))
+      expect(current_path).to eq(discover_index_path)
 
-      visit user_movies_path(@user1, keyword: "Lord of the Rings")
+      visit movies_path(keyword: "Lord of the Rings")
 
       expect(page).to have_button("Return to Discover Page")
 
       click_button("Return to Discover Page")
 
-      expect(current_path).to eq(user_discover_index_path(@user1))
+      expect(current_path).to eq(discover_index_path)
     end
   end
 
   describe "When a user clicks 'Find Top Rated Movies'", :vcr do
     before(:each) do
-      visit user_discover_index_path(@user1.id)
+      visit discover_index_path
+
       click_button("Find Top Rated Movies")
     end
 
@@ -55,14 +63,14 @@ RSpec.describe 'Movies Results Page', type: :feature do
     it 'When the user clicks on the title, they are taken to that movies details page' do
       within ("#movie-278") do
         click_on("Shawshank Redemption")
-        expect(current_path).to eq user_movie_path(@user1.id, "278")
+        expect(current_path).to eq movie_path("278")
       end
     end
   end
 
   describe "When a user searches for a movie", :vcr do
     before(:each) do
-      visit user_discover_index_path(@user1.id)
+      visit discover_index_path
       fill_in :keyword, with: "Lord of the Rings"
       click_button 'Find Movies'
     end
@@ -91,7 +99,7 @@ RSpec.describe 'Movies Results Page', type: :feature do
     it 'When the user clicks on the title, they are taken to that movies details page' do
       within ("#movie-120") do
         click_on("The Lord of the Rings: The Fellowship of the Ring")
-        expect(current_path).to eq user_movie_path(@user1.id, "120")
+        expect(current_path).to eq movie_path("120")
       end
     end
   end

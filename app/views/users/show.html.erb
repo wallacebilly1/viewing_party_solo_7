@@ -1,7 +1,7 @@
 <h1> <%= "#{@user.name}'s Dashboard" %> </h1>
 
 <section class="discover_movies">
-  <%= button_to "Discover Movies", user_discover_index_path(@user), method: :get %>  
+  <%= button_to "Discover Movies", discover_index_path, method: :get %>  
 </section>
 
 <section id="viewing_parties">

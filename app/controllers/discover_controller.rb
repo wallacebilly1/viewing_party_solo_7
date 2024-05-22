@@ -1,8 +1,9 @@
 class DiscoverController < ApplicationController
   def index
-    @user = User.find(params[:user_id])
-    unless cookies.encrypted[:greeting]
-      cookies.encrypted[:greeting] = 'Howdy!'
+    if session[:user_id] == current_user.id
+
+    else 
+      render file: "public/404.html"
     end
   end
 end
