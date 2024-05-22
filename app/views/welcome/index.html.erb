@@ -1,12 +1,13 @@
-
 <h1>Viewing Party</h1>
 
-<h2>Existing Users</h2>
-<ul id="existing_users">
+<% if session[:user_id] == nil %>
+   <%= button_to 'Create New User', register_user_path, method: :get, class: "btn btn-lg btn-outline-secondary" %><br>
+   <%= button_to 'Log In Here', login_path, method: :get, class: "btn btn-lg btn-outline-secondary" %><br>
+<% else%>
+   <h2>Existing Users</h2>
+   <ul id="existing_users">
    <% @users.each do |user| %>
-      <li><%= link_to user.email, "users/#{user.id}" %></li>
+      <li><%= user.email %></li>
    <% end %>
-</ul>
-
-<%= button_to 'Create New User', register_user_path, method: :get, class: "btn btn-lg btn-outline-secondary" %><br>
-<%= button_to 'Log In Here', login_path, method: :get, class: "btn btn-lg btn-outline-secondary" %><br>
+   </ul>
+<% end %>

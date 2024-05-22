@@ -30,9 +30,24 @@ RSpec.describe "Logging In" do
     fill_in :password, with: "123"
   
     click_on "Log In"
-    save_and_open_page
     expect(current_path).to eq(login_path)
   
     expect(page).to have_content("Sorry, your credentials are bad.")
+  end
+
+  it "stays logged in after leaving the site" do
+    user = User.create!(name: "Meg", email: "meg@test.com", password: "test", password_confirmation: "test")
+  
+    visit login_path
+  
+    fill_in :email, with: user.email
+    fill_in :password, with: "test"
+
+    click_on "Log In"
+    log_in_user = User.last
+
+    visit "https://www.google.com"
+
+    visit user_path(log_in_user)
   end
 end

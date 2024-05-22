@@ -6,8 +6,13 @@ Rails.application.routes.draw do
 
   root "welcome#index"
   get '/register', to: 'users#new', as: 'register_user'
-  get '/login', to: 'users#login_form'
-  post '/login', to: 'users#login_user'
+  # get '/login', to: 'users#login_form'
+  get '/login', to: 'sessions#new'
+  # post '/login', to: 'users#login_user'
+  post '/login', to: 'sessions#create'
+
+  post '/logout', to: 'sessions#destroy'
+
 
   resources :users, only: [:show, :create] do
     resources :discover, only: [:index]
@@ -15,5 +20,9 @@ Rails.application.routes.draw do
       resources :viewing_parties, only: [:new, :create, :show]
       resources :similar, only: [:index]
     end
+  end
+
+  namespace :admin do
+    get "/dashboard", to: "dashboard#index"
   end
 end

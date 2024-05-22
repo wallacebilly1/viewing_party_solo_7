@@ -6,36 +6,26 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @facade = MovieFacade.new
-  end
-
-  def create
-    @user = user_params
-    @user[:email] = @user[:email].downcase
-    @new_user = User.new(user_params)
-
-    if @new_user.save
-      flash[:success] = 'Successfully Created New User'
-      redirect_to user_path(@new_user)
+    if session[:user_id] == @user.id
+      @facade = MovieFacade.new
     else
-      flash[:error] = "#{error_message(@new_user.errors)}"
-      redirect_to register_user_path
+      redirect_to root_path
+      flash[:error] = "You must be logged in to view your user dashboard"
     end
   end
 
-  def login_form
+  def create
+    user = user_params
+    user[:email] = user[:email].downcase
+    new_user = User.new(user_params)
 
-  end
-
-  def login_user
-    user = User.find_by(email: params[:email])
-    if user.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:success] = "Welcome, #{user.name}!"
-      redirect_to user_path(user)
+    if new_user.save
+      session[:user_id] = new_user.id
+      flash[:success] = 'Successfully Created New User'
+      redirect_to user_path(new_user)
     else
-      flash[:error] = "Sorry, your credentials are bad."
-      render :login_form
+      flash[:error] = "#{error_message(new_user.errors)}"
+      redirect_to register_user_path
     end
   end
 
